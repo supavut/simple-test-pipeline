@@ -1,11 +1,12 @@
 
+@NonCPS
 def notifyLINE(status) {
     def token = "96T74l9EORhZ8z0pt7BTikVJEWmJ4DxLnlnrP3y38Xe"
     def jobName = env.JOB_NAME +' '+env.GIT_BRANCH
     def buildNo = env.BUILD_NUMBER
 
     def url = 'https://notify-api.line.me/api/notify'
-    def message = "${jobName} Build #${buildNo} ${status} \r\n"
+    def message = "${jobName} Build #${buildNo} *${status}* \r\n"
 
     def changes = message + "Changes:\n"
      def changeLogSets = currentBuild.changeSets
@@ -52,7 +53,7 @@ pipeline {
 
   post{
     success{
-        notifyLINE("succeed")
+        notifyLINE("success")
     }
     failure{
         notifyLINE("failed")
