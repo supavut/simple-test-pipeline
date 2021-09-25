@@ -8,7 +8,7 @@ def notifyLINE(status) {
     def url = 'https://notify-api.line.me/api/notify'
     def message = "${jobName} Build #${buildNo} `*${status}*` \r\n"
 
-    def changes = message + "Changes:\n"
+    def changes = "Changes:\n"
      def changeLogSets = currentBuild.changeSets
      for (int i = 0; i < changeLogSets.size(); i++) {
          def entries = changeLogSets[i].items
