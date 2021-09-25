@@ -18,7 +18,9 @@ def notifyLINE(status) {
              changes += "by ${entry.author} : ${entry.msg}"
          }
      }
-    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
+//     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
+    sh "echo ${message}${changes}"
+
 }
 
 pipeline {
