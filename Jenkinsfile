@@ -6,19 +6,18 @@ def notifyLINE(status) {
 
     def url = 'https://notify-api.line.me/api/notify'
     def message = "${jobName} Build #${buildNo} ${status} \r\n"
-    sh "echo ${message}"
 
-    def changes = "Changes:\n"
+    def changes = message + "Changes:\n"
      def changeLogSets = currentBuild.changeSets
      for (int i = 0; i < changeLogSets.size(); i++) {
          def entries = changeLogSets[i].items
          for (int j = 0; j < entries.length; j++) {
              def entry = entries[j]
 //              echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-             changes += "by ${entry.author} : ${entry.msg} \r\n"
+             changes += "\t by ${entry.author} : ${entry.msg} \r\n"
         }
      }
-//     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
+     curl "${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
      echo "${changes}"
 
 }
