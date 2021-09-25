@@ -16,9 +16,9 @@ def notifyLINE(status) {
              def entry = entries[j]
              echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
              changes += "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-
          }
      }
+     echo "${changes}";
     // sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
 }
 
