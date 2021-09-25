@@ -17,8 +17,8 @@ def notifyLINE(status) {
              changes += "\t by ${entry.author} : ${entry.msg} \r\n"
         }
      }
-     curl "${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
-     echo "${changes}"
+     httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_FORM', customHeaders: [[maskValue: false, name: 'Authorization', value: "Bearer ${token}"]], httpMode: 'POST', requestBody: "message=${message}${changes}", responseHandle: 'NONE', url: "${url}", wrapAsMultipart: false
+     //echo "${changes}"
 
 }
 
