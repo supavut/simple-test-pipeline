@@ -9,7 +9,7 @@ def notifyLINE(status) {
     sh "echo ${message}"
 
     def changes = "Changes: \r\n"
-     def changeLogSets = currentBuild.changeSets
+    def changeLogSets = currentBuild.changeSets
      for (int i = 0; i < changeLogSets.size(); i++) {
          def entries = changeLogSets[i].items
          for (int j = 0; j < entries.length; j++) {
@@ -17,7 +17,8 @@ def notifyLINE(status) {
              changes += "\t - ${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg} \r\n"
          }
      }
-    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+    sh "echo ${changes}"
+//     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
 }
 
 pipeline {
