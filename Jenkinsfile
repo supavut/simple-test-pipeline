@@ -6,7 +6,7 @@ def notifyLINE(status) {
     def buildNo = env.BUILD_NUMBER
 
     def url = 'https://notify-api.line.me/api/notify'
-    def message = "${jobName} Build #${buildNo} *${status}* \r\n"
+    def message = "${jobName} Build #${buildNo} `*${status}*` \r\n"
 
     def changes = message + "Changes:\n"
      def changeLogSets = currentBuild.changeSets
