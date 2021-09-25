@@ -14,12 +14,12 @@ def notifyLINE(status) {
          def entries = changeLogSets[i].items
          for (int j = 0; j < entries.length; j++) {
              def entry = entries[j]
-             echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-             changes += "by ${entry.author} : ${entry.msg}"
-         }
+//              echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
+             changes += "by ${entry.author} : ${entry.msg} \r\n"
+        }
      }
 //     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
-    sh "echo ${message}${changes}"
+    sh "echo ${changes}"
 
 }
 
