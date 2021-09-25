@@ -19,7 +19,7 @@ def notifyLINE(status) {
         }
      }
 //     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
-    sh "echo ${changes}"
+     echo "${changes}"
 
 }
 
