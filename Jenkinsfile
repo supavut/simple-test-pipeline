@@ -8,21 +8,16 @@ def notifyLINE(status) {
     def message = "${jobName} Build #${buildNo} ${status} \r\n"
     sh "echo ${message}"
 
-    def changes = "Changes:\n"
+    def changes = "Changes: \r\n"
      def changeLogSets = currentBuild.changeSets
      for (int i = 0; i < changeLogSets.size(); i++) {
          def entries = changeLogSets[i].items
          for (int j = 0; j < entries.length; j++) {
              def entry = entries[j]
-             echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-             def files = new ArrayList(entry.affectedFiles)
-             for (int k = 0; k < files.size(); k++) {
-                 def file = files[k]
-                 echo "  ${file.editType.name} ${file.path}"
-             }
+             changes += "\t - ${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg} \r\n"
          }
      }
-    // sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
 }
 
 pipeline {
