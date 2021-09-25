@@ -15,11 +15,10 @@ def notifyLINE(status) {
          for (int j = 0; j < entries.length; j++) {
              def entry = entries[j]
              echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-             changes += "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
+             changes += "by ${entry.author} : ${entry.msg}"
          }
      }
-     echo "${changes}";
-    // sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}${changes}'"
 }
 
 pipeline {
